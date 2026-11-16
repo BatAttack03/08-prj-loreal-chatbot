@@ -1,8 +1,19 @@
+
 /* —— basic reset —— */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* —— L'Oréal-inspired colors —— */
+:root {
+  --brand-black: #171717;
+  --brand-gold: #b59a63;
+  --brand-ivory: #faf7f2;
+  --brand-white: #ffffff;
+  --brand-gray: #666666;
+  --brand-border: #e8e1d8;
 }
 
 /* —— body + fonts —— */
@@ -11,6 +22,8 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
+  background: var(--brand-ivory);
+  min-height: 100vh;
 }
 
 .page-wrapper {
@@ -24,40 +37,122 @@ body {
   padding-top: 50px;
 }
 
+/* NEW: L'Oréal logo */
+.brand-logo {
+  display: block;
+  width: 220px;
+  max-width: 80%;
+  height: auto;
+  margin: 0 auto 22px;
+}
+
 .site-title {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 10px;
+  color: var(--brand-black);
+  letter-spacing: 1px;
+}
+
+/* NEW: Subtitle */
+.site-subtitle {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--brand-gray);
+  margin-top: 10px;
 }
 
 /* chat window */
 .chatbox {
   margin: 40px 0;
+  background: var(--brand-white);
+  padding: 24px;
+  border: 1px solid var(--brand-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
+  border: 1px solid var(--brand-border);
+  border-radius: 12px;
   padding: 20px;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: #fdfbf8;
   white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 /* messages */
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
+  max-width: 85%;
+  padding: 13px 17px;
+  border-radius: 16px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
 }
 
+/* NEW: User chat bubble */
 .msg.user {
-  color: #000;
+  color: #ffffff;
+  background: var(--brand-black);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
 }
 
+/* NEW: Assistant chat bubble */
 .msg.ai {
-  color: #666666;
+  color: #333333;
+  background: #f1ebe2;
+  align-self: flex-start;
+  border: 1px solid var(--brand-border);
+  border-bottom-left-radius: 4px;
+}
+
+/* NEW: Message labels */
+.msg-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* NEW: Latest question display */
+.latest-question {
+  background: #f7f1e7;
+  border-left: 4px solid var(--brand-gold);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.latest-question[hidden] {
+  display: none;
+}
+
+.latest-question strong {
+  color: var(--brand-black);
+}
+
+.latest-question p {
+  margin-top: 5px;
+  color: var(--brand-gray);
+  overflow-wrap: anywhere;
+}
+
+/* NEW: Loading message */
+.msg.loading {
+  font-style: italic;
+  opacity: 0.7;
 }
 
 /* input row */
@@ -69,13 +164,17 @@ body {
 
 .chat-form input {
   flex: 1;
+  min-width: 0;
   padding: 12px;
   border: 1px solid #ccc;
-  font-size: 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  background: #ffffff;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
@@ -84,6 +183,7 @@ body {
   background: #000;
   color: #fff;
   border: none;
+  border-radius: 8px;
   padding: 12px;
   width: 48px;
   height: 48px;
@@ -99,12 +199,18 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--brand-gold);
 }
 
 .chat-form button:focus {
   outline: 2px solid #000;
   outline-offset: 2px;
+}
+
+/* NEW: Disabled button */
+.chat-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* visually hidden */
@@ -139,5 +245,43 @@ body {
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: var(--brand-gold);
+}
+
+/* NEW: Mobile responsiveness */
+@media (max-width: 600px) {
+  .page-wrapper {
+    width: 95%;
+  }
+
+  .site-header {
+    padding-top: 30px;
+  }
+
+  .brand-logo {
+    width: 180px;
+  }
+
+  .chatbox {
+    padding: 14px;
+    margin: 24px 0;
+  }
+
+  .chat-window {
+    height: 420px;
+    padding: 12px;
+  }
+
+  .msg {
+    max-width: 92%;
+    font-size: 13px;
+  }
+
+  .chat-form input {
+    font-size: 14px;
+  }
+
+  .site-footer {
+    line-height: 1.8;
+  }
 }
